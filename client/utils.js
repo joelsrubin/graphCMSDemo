@@ -1,0 +1,1 @@
+export let API = 'https://api-ca-central-1.graphcms.com/v2/ckkwp0k2nbya701z7b6ze43go/master'
