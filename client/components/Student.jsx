@@ -5,16 +5,20 @@ import styled from 'styled-components';
 
 export default function Student({ student }) {
   return (
-    <div>
+    <Container>
       <Avatar src={generator.generateRandomAvatar()} />
       <h4>
         {student.name} {''}
       </h4>
-    </div>
+    </Container>
   );
 }
 
 const Avatar = styled.img`
   max-width: 100px;
   max-height: 100px;
+`;
+
+const Container = styled.div`
+  display: flex;
 `;
