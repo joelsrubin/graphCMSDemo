@@ -36,6 +36,7 @@
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "random-avatar-generator": "^2.0.0",
+    "react-loader-spinner": "^4.0.0",
     "styled-components": "^5.2.1"
   }
 }
