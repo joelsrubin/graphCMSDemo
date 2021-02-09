@@ -8,35 +8,41 @@ import styled from 'styled-components';
 
 export default function App() {
   const [students, setStudents] = useState(null);
-  const [staffs, setStaff] = useState(null);
-  const [timeZone, setTimezone] = useState('"mountain"');
-
-  const fetchStudents = async () => {
-    const { students } = await request(
-      API,
-      `
-      {
-        students{
-          name
-          timeZone
-
-        }
-      }
-
-  `
-    );
-    setStudents(students);
-  };
+  const [timeZone, setTimeZone] = useState('pacific');
 
   useEffect(() => {
+    const fetchStudents = async () => {
+      const { students } = await request(
+        API,
+        `
+        {
+            students {
+              name
+              id
+            }
+          }
+    `
+      );
+      console.log('rendered:', students);
+      setStudents(students);
+    };
     fetchStudents();
-  }, []);
-  console.log(students);
+  }, [timeZone]);
+
+  const clickHandler = (e) => {
+    setTimeZone(`${e.target.innerHTML.toLowerCase()}`);
+  };
 
   if (students) {
     return (
       <Container>
         <h1>Students</h1>
+        {/* <Buttons>
+          <button onClick={clickHandler}>Pacific</button>
+          <button onClick={clickHandler}>Mountain</button>
+          <button onClick={clickHandler}>Central</button>
+          <button onClick={clickHandler}>Eastern</button>
+        </Buttons> */}
 
         <Class>
           {students.map((student, i) => (
@@ -49,7 +55,9 @@ export default function App() {
     return <div>loading</div>;
   }
 }
-
+const Buttons = styled.div`
+  margin-top: 10px;
+`;
 const Class = styled.div`
   display: flex;
   width: 75%;
@@ -62,5 +70,12 @@ const Class = styled.div`
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 50%;
+  grid-template-rows: 10% 10% 50%;
 `;
+
+// {
+//   students(where: { timeZone: ${timeZone} }) {
+//     name
+//     id
+//   }
+// }
