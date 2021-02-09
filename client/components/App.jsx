@@ -16,11 +16,12 @@ export default function App() {
         API,
         `
         {
-            students {
-              name
-              id
-            }
+          students(where: { timeZone: "${timeZone}" }) {
+            name
+            id
+            timeZone
           }
+        }
     `
       );
       console.log('rendered:', students);
@@ -37,12 +38,12 @@ export default function App() {
     return (
       <Container>
         <h1>Students</h1>
-        {/* <Buttons>
+        <Buttons>
           <button onClick={clickHandler}>Pacific</button>
           <button onClick={clickHandler}>Mountain</button>
           <button onClick={clickHandler}>Central</button>
           <button onClick={clickHandler}>Eastern</button>
-        </Buttons> */}
+        </Buttons>
 
         <Class>
           {students.map((student, i) => (
@@ -72,10 +73,3 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 10% 10% 50%;
 `;
-
-// {
-//   students(where: { timeZone: ${timeZone} }) {
-//     name
-//     id
-//   }
-// }
